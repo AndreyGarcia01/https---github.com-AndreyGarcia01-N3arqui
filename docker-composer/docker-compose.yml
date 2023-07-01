@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=sqlite:///urls.db
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CACHE_TTL=300
+      - SECRET_KEY=your-secret-key
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine"
